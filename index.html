@@ -3,159 +3,166 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Buddy's Burger | Fresh, Juicy Austin-Style Smash Burgers</title>
+    <title>Buddy's Burger | Official Enterprise Frontend</title>
     <style>
         :root {
             --primary: #E50914;
-            --dark: #111111;
-            --light: #FAFAFB;
-            --gray: #718096;
+            --primary-hover: #B3070F;
+            --dark-bg: #0B0B0C;
+            --card-bg: #121214;
+            --text-main: #FFFFFF;
+            --text-muted: #A0AEC0;
+            --glass: rgba(18, 18, 20, 0.8);
         }
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        body { background-color: var(--light); color: var(--dark); overflow-x: hidden; }
-        
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: '-apple-system', BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; scroll-behavior: smooth; }
+        body { background-color: var(--dark-bg); color: var(--text-main); overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+
         /* Navbar */
-        nav { background: rgba(17, 17, 17, 0.95); padding: 20px 8%; display: flex; justify-content: space-between; align-items: center; position: fixed; width: 100%; top: 0; z-index: 1000; backdrop-filter: blur(10px); border-bottom: 2px solid var(--primary); }
-        .logo { color: #fff; font-size: 24px; font-weight: bold; letter-spacing: 1px; }
+        nav { background: var(--glass); padding: 20px 8%; display: flex; justify-content: space-between; align-items: center; position: fixed; width: 100%; top: 0; z-index: 1000; backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .logo { font-size: 24px; font-weight: 900; letter-spacing: -0.5px; text-transform: uppercase; }
         .logo span { color: var(--primary); }
-        .nav-links a { color: #fff; text-decoration: none; margin-left: 30px; font-weight: 600; transition: 0.3s; }
+        .nav-links a { color: var(--text-main); text-decoration: none; margin-left: 35px; font-weight: 600; font-size: 15px; transition: color 0.3s ease; }
         .nav-links a:hover { color: var(--primary); }
-        .cta-btn { background: var(--primary); color: #fff !important; padding: 10px 20px; border-radius: 8px; }
-        .cta-btn:hover { background: #b3070f; transform: scale(1.05); }
+        .cta-btn { background: var(--primary); color: #fff !important; padding: 12px 26px; border-radius: 10px; font-weight: 700; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 0 4px 15px rgba(229, 9, 20, 0.3); }
+        .cta-btn:hover { background: var(--primary-hover); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(229, 9, 20, 0.5); }
 
-        /* Hero Section */
-        .hero { background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://buddysburger.com/wp-content/uploads/2020/06b/buddys-bg-hero.jpg') no-repeat center center/cover; height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; color: #fff; padding: 0 20px; }
-        .hero h1 { font-size: 3.5rem; font-weight: 800; margin-bottom: 20px; text-transform: uppercase; }
-        .hero h1 span { color: var(--primary); }
-        .hero p { font-size: 1.3rem; max-width: 600px; margin-bottom: 30px; color: #e2e8f0; }
+        /* Hero */
+        .hero { position: relative; height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 0 20px; background: radial-gradient(circle at center, rgba(229,9,20,0.15) 0%, rgba(11,11,12,1) 70%); }
+        .hero h1 { font-size: 4.5rem; font-weight: 900; letter-spacing: -2px; margin-bottom: 20px; line-height: 1.1; text-transform: uppercase; }
+        .hero h1 span { color: var(--primary); text-shadow: 0 0 30px rgba(229,9,20,0.3); }
+        .hero p { font-size: 1.4rem; max-width: 700px; margin-bottom: 40px; color: var(--text-muted); font-weight: 400; line-height: 1.6; }
 
-        /* Locations Hub */
-        .locations-section { padding: 80px 8%; text-align: center; background: #fff; }
-        .section-title { font-size: 2.5rem; margin-bottom: 40px; text-transform: uppercase; font-weight: 700; }
-        .section-title span { color: var(--primary); }
-        .location-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1max)); gap: 30px; margin-top: 20px; }
-        .location-card { background: var(--light); padding: 30px; border-radius: 12px; border: 1px solid #e2e8f0; transition: 0.3s; cursor: pointer; }
-        .location-card:hover { border-color: var(--primary); transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
-        .location-card h3 { margin-bottom: 10px; color: var(--dark); }
-        .location-card p { color: var(--gray); font-size: 14px; }
+        /* Core Locations System (Interactive JS) */
+        .locations-section { padding: 100px 8%; background: #0F0F11; text-align: center; }
+        .section-title { font-size: 2.8rem; font-weight: 900; margin-bottom: 15px; text-transform: uppercase; letter-spacing: -1px; }
+        .section-subtitle { color: var(--text-muted); font-size: 1.1rem; margin-bottom: 50px; }
+        .branch-toggle-container { display: flex; justify-content: center; gap: 15px; margin-bottom: 40px; flex-wrap: wrap; }
+        .btn-toggle { background: #1A1A1E; color: var(--text-muted); border: 1px solid rgba(255,255,255,0.05); padding: 14px 28px; font-weight: 700; border-radius: 12px; cursor: pointer; transition: all 0.3s ease; }
+        .btn-toggle.active, .btn-toggle:hover { background: var(--primary); color: #fff; border-color: var(--primary); box-shadow: 0 4px 15px rgba(229,9,20,0.3); }
+        
+        .live-hub-display { background: var(--card-bg); max-width: 800px; margin: 0 auto; padding: 40px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.05); text-align: left; box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
+        .hub-meta { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 20px; margin-bottom: 20px; }
+        .hub-title { font-size: 1.8rem; font-weight: 800; }
+        .hub-status { background: #2ECC71; color: #fff; padding: 6px 12px; border-radius: 20px; font-size: 12px; font-weight: 700; text-transform: uppercase; }
 
-        /* Premium Menu Section */
-        .menu-section { padding: 80px 8%; background: var(--light); text-align: center; }
-        .menu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; margin-top: 40px; }
-        .menu-item { background: #fff; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.03); border: 1px solid #e2e8f0; transition: 0.3s; }
-        .menu-item:hover { transform: translateY(-5px); box-shadow: 0 12px 25px rgba(229,9,20,0.1); }
-        .menu-img { width: 100%; height: 220px; object-fit: cover; background-color: #eee; }
-        .menu-info { padding: 25px; text-align: left; }
-        .menu-info h3 { font-size: 20px; margin-bottom: 10px; display: flex; justify-content: space-between; }
-        .menu-info h3 .price { color: var(--primary); font-weight: bold; }
-        .menu-info p { color: var(--gray); font-size: 14px; line-height: 1.5; }
+        /* Premium Menu */
+        .menu-section { padding: 100px 8%; background: var(--dark-bg); text-align: center; }
+        .menu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px; margin-top: 20px; }
+        .menu-item { background: var(--card-bg); border-radius: 24px; overflow: hidden; border: 1px solid rgba(255,255,255,0.03); transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+        .menu-item:hover { transform: translateY(-8px); border-color: rgba(229,9,20,0.3); box-shadow: 0 20px 40px rgba(229,9,20,0.08); }
+        .menu-img { width: 100%; height: 250px; object-fit: cover; transition: transform 0.5s ease; }
+        .menu-item:hover .menu-img { transform: scale(1.03); }
+        .menu-info { padding: 30px; text-align: left; }
+        .menu-info h3 { font-size: 22px; font-weight: 800; display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .menu-info h3 .price { color: var(--primary); }
+        .menu-info p { color: var(--text-muted); font-size: 15px; line-height: 1.6; }
 
-        /* Stats Animated Touch */
-        .stats { background: var(--dark); color: #fff; padding: 60px 8%; display: flex; justify-content: space-around; text-align: center; border-top: 4px solid var(--primary); }
-        .stat-box h2 { font-size: 3rem; color: var(--primary); font-weight: bold; }
-        .stat-box p { color: #a0aec0; text-transform: uppercase; font-size: 14px; margin-top: 5px; }
+        /* Stats */
+        .stats { background: #050505; padding: 60px 8%; display: flex; justify-content: space-around; text-align: center; border-top: 1px solid rgba(255,255,255,0.05); }
+        .stat-box h2 { font-size: 3.5rem; font-weight: 900; color: #fff; }
+        .stat-box p { color: var(--primary); font-weight: 700; text-transform: uppercase; font-size: 13px; margin-top: 5px; letter-spacing: 1px; }
 
-        /* Footer with Staff Portal */
-        footer { background: #111; color: #fff; padding: 40px 8%; text-align: center; border-top: 1px solid #2d3748; }
-        footer p { color: var(--gray); font-size: 14px; }
-        .staff-link { display: inline-block; margin-top: 15px; color: var(--primary); text-decoration: none; font-weight: 600; font-size: 13px; opacity: 0.7; transition: 0.3s; }
-        .staff-link:hover { opacity: 1; text-decoration: underline; }
+        /* Premium Footer with Secure Access */
+        footer { background: #080809; padding: 60px 8%; text-align: center; border-top: 1px solid rgba(255,255,255,0.05); }
+        footer p { color: var(--text-muted); font-size: 14px; }
+        .portal-wrapper { margin-top: 25px; }
+        .staff-link { display: inline-flex; align-items: center; gap: 8px; color: var(--primary); text-decoration: none; font-weight: 700; font-size: 14px; padding: 10px 20px; border-radius: 8px; background: rgba(229,9,20,0.05); border: 1px solid rgba(229,9,20,0.1); transition: all 0.3s ease; }
+        .staff-link:hover { background: rgba(229,9,20,0.15); border-color: var(--primary); text-shadow: 0 0 10px rgba(229,9,20,0.2); }
     </style>
 </head>
 <body>
 
-    <!-- Navigation -->
     <nav>
         <div class="logo">BUDDY'S<span>BURGER</span></div>
         <div class="nav-links">
-            <a href="#menu">Menu</a>
-            <a href="#locations">Locations</a>
-            <a href="#" class="cta-btn">Order Online</a>
+            <a href="#locations">Fulfillment Hubs</a>
+            <a href="#menu">Signature Menu</a>
+            <a href="#" class="cta-btn">Launch Order</a>
         </div>
     </nav>
 
-    <!-- Hero Section -->
     <section class="hero">
-        <h1>Fresh, Juicy, <span>Austin-Style</span> Smash Burgers</h1>
-        <p>Made fresh to order with 100% pure beef, crispy edges, and our signature secret seasoning blend. Smashed perfectly since day one.</p>
-        <a href="#menu" class="cta-btn" style="padding: 15px 35px; font-size: 18px; text-decoration: none;">Explore Our Menu</a>
+        <h1>Smashed To <span>Perfection</span></h1>
+        <p>Experience ultra-crispy edges and unparalleled juiciness. Engineered with 100% pure premium beef and our secret 14-spice curation.</p>
+        <a href="#menu" class="cta-btn">Secure Your Order</a>
     </section>
 
-    <!-- Locations -->
     <section id="locations" class="locations-section">
-        <h2 class="section-title">Our <span>Active Hubs</span></h2>
-        <div class="location-grid">
-            <div class="location-card">
-                <h3>📍 Austin Hub</h3>
-                <p>3211 Red River St, Austin, TX 78705</p>
-                <p style="margin-top: 8px; font-weight: 600;">11:00 AM - 11:00 PM</p>
+        <h2 class="section-title">Operational <span>Hubs</span></h2>
+        <p class="section-subtitle">Select a store to interface with active kitchen timelines</p>
+        
+        <div class="branch-toggle-container">
+            <button class="btn-toggle active" onclick="switchBranch('austin')">Austin Main</button>
+            <button class="btn-toggle" onclick="switchBranch('marcos')">San Marcos</button>
+            <button class="btn-toggle" onclick="switchBranch('rock')">Round Rock</button>
+        </div>
+
+        <div class="live-hub-display">
+            <div class="hub-meta">
+                <div class="hub-title" id="hub-name">Austin Fulfillment Hub</div>
+                <div class="hub-status">Live & Accepting Orders</div>
             </div>
-            <div class="location-card">
-                <h3>📍 San Marcos Hub</h3>
-                <p>900 Bugg Ln, San Marcos, TX 78666</p>
-                <p style="margin-top: 8px; font-weight: 600;">11:00 AM - 11:00 PM</p>
-            </div>
-            <div class="location-card">
-                <h3>📍 Round Rock Hub</h3>
-                <p>2101 E Old Settlers Blvd, Round Rock, TX 78665</p>
-                <p style="margin-top: 8px; font-weight: 600;">11:00 AM - 11:00 PM</p>
-            </div>
+            <p id="hub-address" style="color: var(--text-main); font-size: 17px; font-weight: 600;">3211 Red River St, Austin, TX 78705</p>
+            <p id="hub-hours" style="color: var(--text-muted); margin-top: 10px; font-size: 14px;">⏱️ Digital Window: 11:00 AM - 11:00 PM (Daily Corporate Operations)</p>
         </div>
     </section>
 
-    <!-- Stats Section -->
     <section class="stats">
-        <div class="stat-box">
-            <h2>100K+</h2>
-            <p>Burgers Smashed</p>
-        </div>
-        <div class="stat-box">
-            <h2>3</h2>
-            <p>Active Locations</p>
-        </div>
-        <div class="stat-box">
-            <h2>4.9★</h2>
-            <p>Google Rating</p>
-        </div>
+        <div class="stat-box"><h2>100K+</h2><p>Burgers Smashed</p></div>
+        <div class="stat-box"><h2>3</h2><p>Active Stations</p></div>
+        <div class="stat-box"><h2>4.9★</h2><p>Audited Rating</p></div>
     </section>
 
-    <!-- Menu Section -->
     <section id="menu" class="menu-section">
-        <h2 class="section-title">The <span>Best Sellers</span></h2>
+        <h2 class="section-title">The <span>Blueprint</span></h2>
         <div class="menu-grid">
-            <!-- Item 1 -->
             <div class="menu-item">
-                <img class="menu-img" src="https://buddysburger.com/wp-content/uploads/2020/06b/buddys-spicy-burger-p.jpg" alt="Double Spicy">
+                <img class="menu-img" src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=600" alt="Burger">
                 <div class="menu-info">
-                    <h3><span>Double Spicy With Cheese</span> <span class="price">$8.49</span></h3>
-                    <p>Two fresh all-beef smash patties, melted American cheese, fresh jalapeños, and our signature spicy house sauce on a toasted bun.</p>
+                    <h3><span>Double Spicy Cheese</span> <span class="price">$8.49</span></h3>
+                    <p>Dual smashed patties, molten sharp American cheese, fresh-cut jalapeños, layered with proprietary high-heat ghost pepper aioli.</p>
                 </div>
             </div>
-            <!-- Item 2 -->
             <div class="menu-item">
-                <img class="menu-img" src="https://buddysburger.com/wp-content/uploads/2020/06b/buddys-seasoned-fries-p.jpg" alt="Seasoned Fries">
+                <img class="menu-img" src="https://images.unsplash.com/photo-1573080496219-bb080dd4f877?q=80&w=600" alt="Fries">
                 <div class="menu-info">
-                    <h3><span>Signature Seasoned Fries</span> <span class="price">$3.79</span></h3>
-                    <p>Hand-cut fresh potatoes, fried to a perfect golden crisp and tossed generously in our secret 14-spice Buddy seasoning blend.</p>
+                    <h3><span>14-Spice Fries</span> <span class="price">$3.79</span></h3>
+                    <p>Hand-batched Russet potatoes flash-fried to absolute structural crispness, dusted in our legendary house dry rub.</p>
                 </div>
             </div>
-            <!-- Item 3 -->
             <div class="menu-item">
-                <img class="menu-img" src="https://buddysburger.com/wp-content/uploads/2020/06b/buddys-shakes-drinks-p.jpg" alt="Oreo Shake">
+                <img class="menu-img" src="https://images.unsplash.com/photo-1572490122747-3968b75cc699?q=80&w=600" alt="Shake">
                 <div class="menu-info">
-                    <h3><span>Premium Oreo Milkshake</span> <span class="price">$4.99</span></h3>
-                    <p>Rich, creamy vanilla soft-serve ice cream blended perfectly with real crushed Oreo cookies and topped with whipped cream.</p>
+                    <h3><span>Artisanal Oreo Shake</span> <span class="price">$4.99</span></h3>
+                    <p>Premium rich Madagascar vanilla bean base whip-blended with high-density crushed cookie shards and fresh cream crowns.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
     <footer>
-        <p>&copy; 2026 Buddy's Burger Enterprises. Designed with precision.</p>
-        <!-- هنا هتحط لينك الـ Streamlit اللايف لما تطلعه من الخطوة الأولى! -->
-        <a href="https://YOUR_APP_NAME.streamlit.app" target="_blank" class="staff-link">🔒 Secure Staff Portal Login</a>
+        <p>&copy; 2026 Buddy's Burger Corporate Network. All rights reserved.</p>
+        <div class="portal-wrapper">
+            <a href="https://YOUR_APP_NAME.streamlit.app" target="_blank" class="staff-link">
+                🔒 Enterprise Cloud Infrastructure Portal
+            </a>
+        </div>
     </footer>
 
+    <script>
+        const branches = {
+            austin: { name: "Austin Fulfillment Hub", address: "3211 Red River St, Austin, TX 78705", hours: "⏱️ Digital Window: 11:00 AM - 11:00 PM (Daily Corporate Operations)" },
+            marcos: { name: "San Marcos Station", address: "900 Bugg Ln, San Marcos, TX 78666", hours: "⏱️ Digital Window: 11:00 AM - 11:00 PM (Local Campus Pipeline)" },
+            rock: { name: "Round Rock Terminal", address: "2101 E Old Settlers Blvd, Round Rock, TX 78665", hours: "⏱️ Digital Window: 11:00 AM - 11:00 PM (Express Hub)" }
+        };
+        function switchBranch(key) {
+            document.querySelectorAll('.btn-toggle').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            document.getElementById('hub-name').innerText = branches[key].name;
+            document.getElementById('hub-address').innerText = branches[key].address;
+            document.getElementById('hub-hours').innerText = branches[key].hours;
+        }
+    </script>
 </body>
 </html>
