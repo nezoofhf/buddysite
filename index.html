@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buddy's Burger | Fresh, Juicy Austin-Style Smash Burgers</title>
+    <style>
+        :root {
+            --primary: #E50914;
+            --dark: #111111;
+            --light: #FAFAFB;
+            --gray: #718096;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: var(--light); color: var(--dark); overflow-x: hidden; }
+        
+        /* Navbar */
+        nav { background: rgba(17, 17, 17, 0.95); padding: 20px 8%; display: flex; justify-content: space-between; align-items: center; position: fixed; width: 100%; top: 0; z-index: 1000; backdrop-filter: blur(10px); border-bottom: 2px solid var(--primary); }
+        .logo { color: #fff; font-size: 24px; font-weight: bold; letter-spacing: 1px; }
+        .logo span { color: var(--primary); }
+        .nav-links a { color: #fff; text-decoration: none; margin-left: 30px; font-weight: 600; transition: 0.3s; }
+        .nav-links a:hover { color: var(--primary); }
+        .cta-btn { background: var(--primary); color: #fff !important; padding: 10px 20px; border-radius: 8px; }
+        .cta-btn:hover { background: #b3070f; transform: scale(1.05); }
+
+        /* Hero Section */
+        .hero { background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://buddysburger.com/wp-content/uploads/2020/06b/buddys-bg-hero.jpg') no-repeat center center/cover; height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; color: #fff; padding: 0 20px; }
+        .hero h1 { font-size: 3.5rem; font-weight: 800; margin-bottom: 20px; text-transform: uppercase; }
+        .hero h1 span { color: var(--primary); }
+        .hero p { font-size: 1.3rem; max-width: 600px; margin-bottom: 30px; color: #e2e8f0; }
+
+        /* Locations Hub */
+        .locations-section { padding: 80px 8%; text-align: center; background: #fff; }
+        .section-title { font-size: 2.5rem; margin-bottom: 40px; text-transform: uppercase; font-weight: 700; }
+        .section-title span { color: var(--primary); }
+        .location-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1max)); gap: 30px; margin-top: 20px; }
+        .location-card { background: var(--light); padding: 30px; border-radius: 12px; border: 1px solid #e2e8f0; transition: 0.3s; cursor: pointer; }
+        .location-card:hover { border-color: var(--primary); transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
+        .location-card h3 { margin-bottom: 10px; color: var(--dark); }
+        .location-card p { color: var(--gray); font-size: 14px; }
+
+        /* Premium Menu Section */
+        .menu-section { padding: 80px 8%; background: var(--light); text-align: center; }
+        .menu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; margin-top: 40px; }
+        .menu-item { background: #fff; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.03); border: 1px solid #e2e8f0; transition: 0.3s; }
+        .menu-item:hover { transform: translateY(-5px); box-shadow: 0 12px 25px rgba(229,9,20,0.1); }
+        .menu-img { width: 100%; height: 220px; object-fit: cover; background-color: #eee; }
+        .menu-info { padding: 25px; text-align: left; }
+        .menu-info h3 { font-size: 20px; margin-bottom: 10px; display: flex; justify-content: space-between; }
+        .menu-info h3 .price { color: var(--primary); font-weight: bold; }
+        .menu-info p { color: var(--gray); font-size: 14px; line-height: 1.5; }
+
+        /* Stats Animated Touch */
+        .stats { background: var(--dark); color: #fff; padding: 60px 8%; display: flex; justify-content: space-around; text-align: center; border-top: 4px solid var(--primary); }
+        .stat-box h2 { font-size: 3rem; color: var(--primary); font-weight: bold; }
+        .stat-box p { color: #a0aec0; text-transform: uppercase; font-size: 14px; margin-top: 5px; }
+
+        /* Footer with Staff Portal */
+        footer { background: #111; color: #fff; padding: 40px 8%; text-align: center; border-top: 1px solid #2d3748; }
+        footer p { color: var(--gray); font-size: 14px; }
+        .staff-link { display: inline-block; margin-top: 15px; color: var(--primary); text-decoration: none; font-weight: 600; font-size: 13px; opacity: 0.7; transition: 0.3s; }
+        .staff-link:hover { opacity: 1; text-decoration: underline; }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">BUDDY'S<span>BURGER</span></div>
+        <div class="nav-links">
+            <a href="#menu">Menu</a>
+            <a href="#locations">Locations</a>
+            <a href="#" class="cta-btn">Order Online</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Fresh, Juicy, <span>Austin-Style</span> Smash Burgers</h1>
+        <p>Made fresh to order with 100% pure beef, crispy edges, and our signature secret seasoning blend. Smashed perfectly since day one.</p>
+        <a href="#menu" class="cta-btn" style="padding: 15px 35px; font-size: 18px; text-decoration: none;">Explore Our Menu</a>
+    </section>
+
+    <!-- Locations -->
+    <section id="locations" class="locations-section">
+        <h2 class="section-title">Our <span>Active Hubs</span></h2>
+        <div class="location-grid">
+            <div class="location-card">
+                <h3>📍 Austin Hub</h3>
+                <p>3211 Red River St, Austin, TX 78705</p>
+                <p style="margin-top: 8px; font-weight: 600;">11:00 AM - 11:00 PM</p>
+            </div>
+            <div class="location-card">
+                <h3>📍 San Marcos Hub</h3>
+                <p>900 Bugg Ln, San Marcos, TX 78666</p>
+                <p style="margin-top: 8px; font-weight: 600;">11:00 AM - 11:00 PM</p>
+            </div>
+            <div class="location-card">
+                <h3>📍 Round Rock Hub</h3>
+                <p>2101 E Old Settlers Blvd, Round Rock, TX 78665</p>
+                <p style="margin-top: 8px; font-weight: 600;">11:00 AM - 11:00 PM</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="stat-box">
+            <h2>100K+</h2>
+            <p>Burgers Smashed</p>
+        </div>
+        <div class="stat-box">
+            <h2>3</h2>
+            <p>Active Locations</p>
+        </div>
+        <div class="stat-box">
+            <h2>4.9★</h2>
+            <p>Google Rating</p>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section id="menu" class="menu-section">
+        <h2 class="section-title">The <span>Best Sellers</span></h2>
+        <div class="menu-grid">
+            <!-- Item 1 -->
+            <div class="menu-item">
+                <img class="menu-img" src="https://buddysburger.com/wp-content/uploads/2020/06b/buddys-spicy-burger-p.jpg" alt="Double Spicy">
+                <div class="menu-info">
+                    <h3><span>Double Spicy With Cheese</span> <span class="price">$8.49</span></h3>
+                    <p>Two fresh all-beef smash patties, melted American cheese, fresh jalapeños, and our signature spicy house sauce on a toasted bun.</p>
+                </div>
+            </div>
+            <!-- Item 2 -->
+            <div class="menu-item">
+                <img class="menu-img" src="https://buddysburger.com/wp-content/uploads/2020/06b/buddys-seasoned-fries-p.jpg" alt="Seasoned Fries">
+                <div class="menu-info">
+                    <h3><span>Signature Seasoned Fries</span> <span class="price">$3.79</span></h3>
+                    <p>Hand-cut fresh potatoes, fried to a perfect golden crisp and tossed generously in our secret 14-spice Buddy seasoning blend.</p>
+                </div>
+            </div>
+            <!-- Item 3 -->
+            <div class="menu-item">
+                <img class="menu-img" src="https://buddysburger.com/wp-content/uploads/2020/06b/buddys-shakes-drinks-p.jpg" alt="Oreo Shake">
+                <div class="menu-info">
+                    <h3><span>Premium Oreo Milkshake</span> <span class="price">$4.99</span></h3>
+                    <p>Rich, creamy vanilla soft-serve ice cream blended perfectly with real crushed Oreo cookies and topped with whipped cream.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Buddy's Burger Enterprises. Designed with precision.</p>
+        <!-- هنا هتحط لينك الـ Streamlit اللايف لما تطلعه من الخطوة الأولى! -->
+        <a href="https://YOUR_APP_NAME.streamlit.app" target="_blank" class="staff-link">🔒 Secure Staff Portal Login</a>
+    </footer>
+
+</body>
+</html>
